@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+</head>
+<body class="container">
+
+    <h1 align="center">Wellcome to HTML Demo</h1>
+    <p align="center">This is the sample<br> let's see together</p>
+    
+
+    <form method="post" class="form-inline">
+        <div>
+            <input type="text" name="id" placeholder="ID" class="form-control">
+            <input type="text" name="name" placeholder="NAME" class="form-control">
+            <select name="sex" class="form-control">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <input type="text" name="tel" placeholder="TEL" class="form-control">
+            <input type="text" name="adress" placeholder="ADRESS" class="form-control">
+            <button type="button" class="btn btn-info" id="btn-add">ADD NEW</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Tel</th>
+                <th>Adress</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        $(function(){
+            $('#btn-add').click(function(){
+                var _id= $('input[name="id"]').val();
+                var _name= $('input[name="name"]').val();
+                var _sex= $('select[name="sex"]').val();
+                var _tel= $('input[name="tel"]').val();
+                var _adress= $('input[name="adress"]').val();
+                
+
+                var _tr='<tr><td>'+ _id +'</td>    <td>'+ _name +'</td>    <td>' +_sex +'</td>    <td>'+_tel +'</td>    <td>'+_adress +'</td></tr>';
+                $('tbody').append(_tr);
+            });
+        });
+    </script>
+</body>
+</html>
