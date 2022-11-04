@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+</head>
+<body class="container">
+
+    <h1 align="center">Wellcome to HTML Demo</h1>
+    <p align="center">This is the sample<br> let's see together</p>
+    
+
+    <form method="post" class="form-inline">
+        <div>
+            <input type="text" name="id" placeholder="ID" class="form-control">
+            <input type="text" name="name" placeholder="NAME" class="form-control">
+            <select name="sex" class="form-control">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <input type="text" name="tel" placeholder="TEL" class="form-control">
+            <input type="text" name="adress" placeholder="ADRESS" class="form-control">
+            <button type="button" class="btn btn-info" id="btn-add">ADD NEW</button>
+            <button type="button" class="btn btn-success" id="btn-update">Update</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Tel</th>
+                <th>Adress</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        $(function(){
+            $('#btn-add').click(function(){
+                var _id= $('input[name="id"]').val();
+                var _name= $('input[name="name"]').val();
+                var _sex= $('select[name="sex"]').val();
+                var _tel= $('input[name="tel"]').val();
+                var _adress= $('input[name="adress"]').val();
+                
+
+                var _tr='<tr><td>'+ _id +'</td>    <td>'+ _name +'</td>    <td>' +_sex +'</td>    <td>'+_tel +'</td>    <td>'+_adress +'</td> <td><button type="button" class="btn btn-success btn-edit">Edit</button>  <button type="button" class="btn btn-danger btn-delete">Delete!</button></td></tr>';
+                $('tbody').append(_tr);
+            });
+
+            var _trEdit = null;
+            $(document).on('click','.btn-edit', function(){
+                _trEdit = $(this).closest('tr');
+                var _id = $(_trEdit).find('td:eq(0)').text();
+                var _name = $(_trEdit).find('td:eq(1)').text();
+                var _sex = $(_trEdit).find('td:eq(2)').text();
+                var _tel = $(_trEdit).find('td:eq(3)').text();
+                var _adress= $(_trEdit).find('td:eq(4)').text();
+
+
+                $('input[name="id"]').val(_id);
+                $('input[name="name"]').val(_name);
+                $('input[name="sex"]').val(_sex);
+                $('input[name="tel"]').val(_tel);
+                $('input[name="adress"]').val(_adress);
+              
+            });
+
+        $('#btn-update').click(function(){
+            if(_trEdit){
+                var _id= $('input[name="id"]').val();
+                var _name= $('input[name="name"]').val();
+                var _sex= $('select[name="sex"]').val();
+                var _tel= $('input[name="tel"]').val();
+                var _adress= $('input[name="adress"]').val();
+
+
+
+                $(_trEdit).find('td:eq(0)').text(_id);
+                $(_trEdit).find('td:eq(1)').text(_name);
+                $(_trEdit).find('td:eq(2)').text(_sex);
+                $(_trEdit).find('td:eq(3)').text(_tel);
+                $(_trEdit).find('td:eq(4)').text(_adress);
+
+                alert("Record has been updated!");
+                _trEdit = null;
+            }
+        });
+
+        $(document).on('click','.btn-delete', function(){
+            if(confirm("Are you sure want to delete this record?")){
+                $(this).closest('tr').remove();
+            }
+        });
+    });
+    </script>
+</body>
+</html>
