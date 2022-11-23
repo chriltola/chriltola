@@ -1,0 +1,204 @@
+#include<iostream>
+#include<fstream>
+#include<windows.h>
+#include<string>
+#include<array>
+
+
+using namespace std;
+
+void changeColor(int desiredColor)
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),desiredColor);
+	};
+int main()
+{
+	
+
+
+	string line;
+	int row;
+	int col=2;
+	string arr[1000][2];
+	string fileName;
+	cout<<"Enter File Name(Calculate): ";
+	cin>>fileName;
+	cout<<"Insert Row: ";
+	cin>>row;
+	
+	
+
+	ifstream inputfile(fileName.c_str());
+
+
+	if(!inputfile.is_open())
+		cout<<"Error Opening File";
+	
+		
+	
+	for(int r=0; r<row; r++){
+		for(int c = 0; c<col; c++)
+		{
+			inputfile>>arr[r][c];
+		}
+	}
+
+	for (int r=0; r<row; r++)
+	{
+		
+		for(int c = 0; c<col; c++)
+		{
+			//cout<<"("<<r<<","<<c<<")"<<arr[r][c]<< "\t\t"<<endl;
+		}
+	
+
+		
+		//Card Inserted
+		string insert = arr[11*r+1][1];
+		int h1,m1,s1;
+		sscanf_s(insert.c_str(), "%d:%d:%d", &h1,&m1,&s1);
+		int s_insert=(h1*3600) + (m1*60) +s1;
+		
+		
+		//application
+		string application = arr[11*r+2][1];
+		int h2,m2,s2;
+		sscanf_s(application.c_str(), "%d:%d:%d", &h2,&m2,&s2);
+		int s_application=(h2*3600) + (m2*60) +s2;
+		
+		
+		//pinenter
+		string pinenter = arr[11*r+3][1];
+		int h3,m3,s3;
+		sscanf_s(pinenter.c_str(), "%d:%d:%d", &h3,&m3,&s3);
+		int s_pinenter=(h3*3600) + (m3*60) +s3;
+
+		//arqc
+		string arqc = arr[11*r+4][1];
+		int h4,m4,s4;
+		sscanf_s(arqc.c_str(), "%d:%d:%d", &h4,&m4,&s4);
+		int s_arqc=(h4*3600) + (m4*60) +s4;
+
+		//tc
+		string tc = arr[11*r+5][1];
+		int h5,m5,s5;
+		sscanf_s(tc.c_str(), "%d:%d:%d", &h5,&m5,&s5);
+		int s_tc=(h5*3600) + (m5*60) +s5;
+
+		//Notstack
+		string notestack = arr[11*r+9][1];
+		int h6,m6,s6;
+		sscanf_s(notestack.c_str(), "%d:%d:%d", &h6,&m6,&s6);
+		int s_notestack=(h6*3600) + (m6*60) +s6;
+
+
+		//notetaken
+		string notetaken = arr[11*r+10][1];
+		int h7,m7,s7;
+		sscanf_s(notetaken.c_str(), "%d:%d:%d", &h7,&m7,&s7);
+		int s_notetaken=(h7*3600) + (m7*60) +s7;
+		
+
+		int v = s_pinenter-s_insert;
+		int w = s_notestack-s_application;
+		int x = s_notetaken-s_notestack;
+		int y = s_tc-s_arqc;
+		int z = s_notetaken-s_insert;
+		
+		
+		cout<<"Card Insert and PIN Entered: "<<v<<endl;
+		cout<<"Transactions Application Selected: "<<w<<endl;
+		cout<<"Notes transportation and dispense: "<<x<<endl;
+		cout<<"ARQC EMV Crypto processing: "<<y<<endl;
+		cout<<"CardInserted to Note Taken: "<<z<<endl;
+
+		/*
+		cout<<r+1<< ") "<<arr[8*r][1]<<" "<<arr[8*r][1]<<endl;
+		changeColor(4);
+		cout<<"A) Start: "<<arr[8*r+2][1]<<" --> End PIN: "<<arr[8*r+3][1]<<" ("<<x<<"s)"<<endl;
+		changeColor(2);
+		cout<<"B) Trxn Request: "<<arr[8*r+4][1]<<" --> Notes Stacked: "<<arr[8*r+5][1]<<" ("<<y<<"s)"<<endl;
+		changeColor(1);
+		cout<<"c) Card Taken: "<<arr[8*r+6][1]<<" --> Notes Taken: "<<arr[8*r+7][1]<<" ("<<z<<"s)"<<endl;
+		changeColor(3);
+		cout<<" Processing Time: "<<x+y+z<<"s"<<endl;
+		cout<<"-----------------------------------------------------------------"<<endl;
+		cout<<endl;
+		*/
+	}
+	cout<<endl;
+
+
+}
+
+
+
+
+
+------------------------------- -------------------------------
+1.CARD_INSERTED: 10:44:39
+2.APPLICATION_SELECTED: 10:44:41
+3.PIN_ENTERED: 10:44:48
+4.ARQC: 10:44:49
+5.TC: 10:44:52
+2.APPLICATION_SELECTED: 10:44:54
+4.ARQC: 10:45:04
+5.TC: 10:45:12
+6.NOTES_STACKED: 10:45:21
+7.NOTES_TAKEN: 10:45:29
+------------------------------- -------------------------------
+1.CARD_INSERTED: 11:23:57
+2.APPLICATION_SELECTED: 11:24:00
+3.PIN_ENTERED: 11:24:07
+4.ARQC: 11:24:09
+5.TC: 11:24:12
+2.APPLICATION_SELECTED: 11:24:14
+4.ARQC: 11:24:32
+5.TC: 11:24:41
+6.NOTES_STACKED: 11:24:47
+7.NOTES_TAKEN: 11:24:55
+------------------------------- -------------------------------
+1.CARD_INSERTED: 14:59:19
+2.APPLICATION_SELECTED: 14:59:21
+3.PIN_ENTERED: 14:59:25
+4.ARQC: 14:59:27
+5.TC: 14:59:29
+2.APPLICATION_SELECTED: 14:59:31
+4.ARQC: 14:59:42
+5.TC: 14:59:51
+6.NOTES_STACKED: 15:00:03
+7.NOTES_TAKEN: 15:00:13
+------------------------------- -------------------------------
+1.CARD_INSERTED: 10:44:39
+2.APPLICATION_SELECTED: 10:44:41
+3.PIN_ENTERED: 10:44:48
+4.ARQC: 10:44:49
+5.TC: 10:44:52
+2.APPLICATION_SELECTED: 10:44:54
+4.ARQC: 10:45:04
+5.TC: 10:45:12
+6.NOTES_STACKED: 10:45:21
+7.NOTES_TAKEN: 10:45:29
+------------------------------- -------------------------------
+1.CARD_INSERTED: 11:23:57
+2.APPLICATION_SELECTED: 11:24:00
+3.PIN_ENTERED: 11:24:07
+4.ARQC: 11:24:09
+5.TC: 11:24:12
+2.APPLICATION_SELECTED: 11:24:14
+4.ARQC: 11:24:32
+5.TC: 11:24:41
+6.NOTES_STACKED: 11:24:47
+7.NOTES_TAKEN: 11:24:55
+------------------------------- -------------------------------
+1.CARD_INSERTED: 14:59:19
+2.APPLICATION_SELECTED: 14:59:21
+3.PIN_ENTERED: 14:59:25
+4.ARQC: 14:59:27
+5.TC: 14:59:29
+2.APPLICATION_SELECTED: 14:59:31
+4.ARQC: 14:59:42
+5.TC: 14:59:51
+6.NOTES_STACKED: 15:00:03
+7.NOTES_TAKEN: 15:00:13
+
